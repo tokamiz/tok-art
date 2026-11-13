@@ -1,0 +1,10 @@
+{# Bildblock. Die Bildunterschrift gehört zum Block, Ort und Datei zum Medium. #}
+{% set item = media[block.mediaId] ?? null %}
+{% if item %}
+    <figure class="block-figure">
+        <img src="{{ asset(item.filePath|trim('/', 'left')) }}" alt="{{ block.caption ?? item.place ?? '' }}">
+        {% if block.caption %}
+            <figcaption>{{ block.caption }}</figcaption>
+        {% endif %}
+    </figure>
+{% endif %}

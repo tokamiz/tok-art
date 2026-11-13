@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fotos{% endblock %}
+
+{% block body %}
+    <section class="stack">
+        <h1 class="page-title">Fotos</h1>
+
+        {#
+            Vue-Insel: Mit JavaScript ersetzt die Komponente PhotoGallery (assets/vue/) den Inhalt dieses
+            Elements und filtert ohne Neuladen über /api/photos. Die Startdaten stehen in data-props.
+
+            Ohne JavaScript bleibt das HTML darunter: ein normales GET-Formular, die Auswahl steht in der Adresse.
+            Ausgegraut sind Optionen, die mit den anderen Filtern kein Foto ergeben.
+        #}
+        <div class="stack" data-vue-component="PhotoGallery" data-props="{{ vueProps|json_encode }}">
+        <form method="get" action="{{ path('photo_index') }}" class="filters">
+            <select name="reise" aria-label="Reise">
+                <option value="">Alle Reisen</option>
+                {% for trip in trips %}
+                    <option value="{{ trip.id }}"
+                            {{ filter.trip == trip.id ? 'selected' }}
+                            {{ not availableTrips.has(trip.id) ? 'disabled' }}>{{ trip.title }}</option>
+                {% endfor %}
+            </select>
+
+            <select name="thema" aria-label="Thema">
+                <option value="">Alle Themen</option>
+                {% for topic in topics %}
+                    <option value="{{ topic.id }}"
+                            {{ filter.topic == topic.id ? 'selected' }}
+                            {{ not availableTopics.has(topic.id) ? 'disabled' }}>{{ topic.name }}</option>
+                {% endfor %}
+            </select>
+
+            <select name="jahr" aria-label="Jahr">
+                <option value="">Alle Jahre</option>
+                {% for year in years %}
+                    <option value="{{ year }}"
+                            {{ filter.year == year ? 'selected' }}
+                            {{ not availableYears.has(year) ? 'disabled' }}>{{ year == noDate ? 'Ohne Datum' : year }}</option>
+                {% endfor %}
+            </select>
+
+            <select name="schlagwort" aria-label="Schlagwort">
+                <option value="">Alle Schlagwörter</option>
+                {% for keyword in keywords %}
+                    <option value="{{ keyword.id }}"
+                            {{ filter.keyword == keyword.id ? 'selected' }}
+                            {{ not availableKeywords.has(keyword.id) ? 'disabled' }}>{{ keyword.name }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit" class="button filters__submit">Filtern</button>
+        </form>
+
+        {% if filter.active %}
+            <a href="{{ path('photo_index') }}" class="text-link">Filter zurücksetzen</a>
+        {% endif %}
+
+        {% if photos is not empty %}
+            <div class="photo-grid">
+                {% for item in photos %}
+                    {{ include('photo/_tile.html.twig', {
+                        photo: item.photo,
+                        entry: item.entry,
+                        trip: tripMap[item.tripId] ?? null,
+                        topics: item.photo.topicIds|map(id => topicMap[id] ?? null)|filter(t => t is not null),
+                    }) }}
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="muted">Keine Fotos gefunden.</p>
+        {% endif %}
+        </div>
+    </section>
+{% endblock %}

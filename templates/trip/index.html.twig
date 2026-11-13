@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reisen{% endblock %}
+
+{% block body %}
+    <section class="stack">
+        <h1 class="page-title">Reisen</h1>
+
+        <ul class="card-list">
+            {% for trip in trips %}
+                <li>
+                    <a href="{{ path('trip_show', {id: trip.id}) }}" class="card">
+                        <h2 class="card__title">{{ trip.title }}</h2>
+                        {% if trip.startDate %}
+                            <p class="card__meta">
+                                {{ trip.startDate|date_de }}{% if trip.endDate %} – {{ trip.endDate|date_de }}{% endif %}
+                            </p>
+                        {% endif %}
+                    </a>
+                </li>
+            {% else %}
+                <li class="muted">Noch keine Reisen.</li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

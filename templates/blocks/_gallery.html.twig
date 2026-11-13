@@ -1,0 +1,9 @@
+{# Galerieblock: mehrere Fotos im Raster. Fehlende Medien werden übersprungen. #}
+{% set items = block.mediaIds|map(id => media[id] ?? null)|filter(item => item is not null) %}
+{% if items is not empty %}
+    <div class="gallery">
+        {% for item in items %}
+            <img src="{{ asset(item.filePath|trim('/', 'left')) }}" alt="{{ item.place ?? '' }}" class="tile-image">
+        {% endfor %}
+    </div>
+{% endif %}

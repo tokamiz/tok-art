@@ -1,0 +1,9 @@
+{# Vorschau eines Fotos oder Videos in der Verwaltung (MediaCrudController). #}
+{% set file = field.value %}
+{% if file %}
+    {% if file|lower ends with '.mp4' %}
+        <video src="{{ asset('media/' ~ file) }}" muted preload="metadata" style="max-height: 60px; max-width: 100px;"></video>
+    {% else %}
+        <img src="{{ asset('media/' ~ file) }}" alt="" style="height: 60px; width: 80px; object-fit: cover; border-radius: 4px;">
+    {% endif %}
+{% endif %}

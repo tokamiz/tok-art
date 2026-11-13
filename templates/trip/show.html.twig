@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reise: {{ trip.title }}{% endblock %}
+
+{% block body %}
+    <section class="stack">
+        <h1 class="page-title">Reise: {{ trip.title }}</h1>
+
+        {% if entries is empty %}
+            <p class="muted">Keine Einträge für diese Reise.</p>
+        {% else %}
+            {{ include('_timeline.html.twig', {entries: entries}) }}
+        {% endif %}
+    </section>
+{% endblock %}

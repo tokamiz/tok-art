@@ -1,0 +1,10 @@
+{# Videoblock. Die Unterschrift steht nach dem Video – Inhalt im <video> wäre nur Ersatz. #}
+{% set item = media[block.mediaId] ?? null %}
+{% if item %}
+    <figure class="block-figure block-figure--video">
+        <video src="{{ asset(item.filePath|trim('/', 'left')) }}" controls preload="metadata"></video>
+        {% if block.caption %}
+            <figcaption>{{ block.caption }}</figcaption>
+        {% endif %}
+    </figure>
+{% endif %}

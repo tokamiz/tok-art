@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {# Jede Seite setzt nur ihren Teil; ohne Titel bleibt „Foto-Tagebuch". #}
+        {% set page_title = block('title') is defined ? block('title')|trim : '' %}
+        <title>{{ page_title ? page_title ~ ' · Foto-Tagebuch' : 'Foto-Tagebuch' }}</title>
+        <link rel="icon" href="{{ asset('favicon.ico') }}">
+        {# CSS, JavaScript und Vue-Komponenten kommen über Vite (assets/app.ts). #}
+        {{ vite_entry_link_tags('app') }}
+        {{ vite_entry_script_tags('app') }}
+    </head>
+    <body>
+        {% set tabs = [
+            {path: path('home'), label: 'Über mich'},
+            {path: path('trip_index'), label: 'Reisen'},
+            {path: path('topic_index'), label: 'Themen'},
+            {path: path('photo_index'), label: 'Fotos'},
+            {path: path('contact'), label: 'Kontakt'},
+        ] %}
+        <header class="site-header">
+            <a href="{{ path('home') }}" class="site-header__brand">Foto-Tagebuch</a>
+            <nav class="site-nav" aria-label="Hauptnavigation">
+                {% for tab in tabs %}
+                    {% set active = is_active_tab(tab.path, app.request.pathInfo) %}
+                    <a href="{{ tab.path }}"
+                       class="site-nav__link{{ active ? ' is-active' }}"
+                       {% if active %}aria-current="page"{% endif %}>{{ tab.label }}</a>
+                {% endfor %}
+            </nav>
+        </header>
+
+        {# Die Fotos-Seite ist breiter; Textseiten bleiben schmal und gut lesbar. #}
+        <main class="site-main{{ wide|default(false) ? ' site-main--wide' }}">
+            {% block body %}{% endblock %}
+        </main>
+    </body>
+</html>

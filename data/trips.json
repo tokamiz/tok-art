@@ -1,0 +1,33 @@
+[
+  {
+    "id": "finnland-schweden",
+    "title": "Finnland und Schweden",
+    "startDate": "2019-07-08",
+    "endDate": "2019-08-02"
+  },
+  {
+    "id": "osteuropa-kaukasus",
+    "title": "Russland, Georgien, Türkei, Bulgarien",
+    "startDate": "2016"
+  },
+  {
+    "id": "griechenland",
+    "title": "Griechenland",
+    "startDate": "2021-09-10",
+    "endDate": "2021-09-24"
+  },
+  {
+    "id": "italien",
+    "title": "Italien",
+    "startDate": "2018-05"
+  },
+  {
+    "id": "spanien",
+    "title": "Spanien"
+  },
+  {
+    "id": "island",
+    "title": "Island",
+    "startDate": "2024"
+  }
+]

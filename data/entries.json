@@ -1,0 +1,371 @@
+[
+  {
+    "id": "helsinki-am-hafen",
+    "title": "Helsinki am Hafen",
+    "date": "2019-07-12",
+    "tripId": "finnland-schweden",
+    "topicIds": [
+      "staedte",
+      "meer"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Beispieltext: Der erste Tag der Reise. Am Hafen von Helsinki riecht es nach Salz und frischem Fisch."
+      },
+      {
+        "id": "b2",
+        "type": "image",
+        "mediaId": "helsinki",
+        "caption": "Morgens am Marktplatz"
+      },
+      {
+        "id": "b3",
+        "type": "text",
+        "content": "Beispieltext: Am Abend fährt die Fähre hinaus aufs offene Meer."
+      }
+    ]
+  },
+  {
+    "id": "lappland",
+    "title": "Stille in Lappland",
+    "date": "2019-07",
+    "tripId": "finnland-schweden",
+    "topicIds": [
+      "berge"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Beispieltext: Mitternachtssonne über den Fjells. Hier wird es im Sommer nie richtig dunkel."
+      },
+      {
+        "id": "b2",
+        "type": "image",
+        "mediaId": "lappland"
+      }
+    ]
+  },
+  {
+    "id": "stockholm-und-schaeren",
+    "title": "Stockholm und die Schären",
+    "date": "2019-07-26",
+    "tripId": "finnland-schweden",
+    "topicIds": [
+      "staedte",
+      "meer"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Beispieltext: Von der Altstadt aus mit dem Boot zu den Inseln."
+      },
+      {
+        "id": "b2",
+        "type": "gallery",
+        "mediaIds": [
+          "stockholm",
+          "schaeren"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "st-petersburg",
+    "title": "Ankunft in St. Petersburg",
+    "date": "2016",
+    "tripId": "osteuropa-kaukasus",
+    "topicIds": [
+      "staedte",
+      "kultur"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Beispieltext: Der Beginn einer langen Reise nach Süden."
+      },
+      {
+        "id": "b2",
+        "type": "image",
+        "mediaId": "st-petersburg"
+      }
+    ]
+  },
+  {
+    "id": "georgien",
+    "title": "Georgien: Berge und Tiflis",
+    "date": "2016",
+    "tripId": "osteuropa-kaukasus",
+    "topicIds": [
+      "berge",
+      "staedte",
+      "essen"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Beispieltext: Die Heerstraße hinauf in den Kaukasus."
+      },
+      {
+        "id": "b2",
+        "type": "image",
+        "mediaId": "kaukasus",
+        "caption": "Blick auf den Kasbek"
+      },
+      {
+        "id": "b3",
+        "type": "text",
+        "content": "Beispieltext: Zurück in Tiflis gibt es Chatschapuri und Wein."
+      },
+      {
+        "id": "b4",
+        "type": "image",
+        "mediaId": "tiflis"
+      }
+    ]
+  },
+  {
+    "id": "istanbul",
+    "title": "Istanbul zwischen zwei Kontinenten",
+    "date": "2016",
+    "tripId": "osteuropa-kaukasus",
+    "topicIds": [
+      "staedte",
+      "kultur"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "image",
+        "mediaId": "istanbul"
+      },
+      {
+        "id": "b2",
+        "type": "text",
+        "content": "Beispieltext: Mit der Fähre über den Bosporus, von Europa nach Asien."
+      }
+    ]
+  },
+  {
+    "id": "warna",
+    "title": "Schwarzmeerküste",
+    "date": "2016",
+    "tripId": "osteuropa-kaukasus",
+    "topicIds": [
+      "meer"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Beispieltext: Die letzte Station: ein paar ruhige Tage am Meer in Warna."
+      },
+      {
+        "id": "b2",
+        "type": "image",
+        "mediaId": "warna"
+      }
+    ]
+  },
+  {
+    "id": "athen",
+    "title": "Athen und die Akropolis",
+    "date": "2021-09-11",
+    "tripId": "griechenland",
+    "topicIds": [
+      "kultur",
+      "staedte"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Beispieltext: Früh am Morgen, bevor die Hitze kommt, hinauf zur Akropolis."
+      },
+      {
+        "id": "b2",
+        "type": "image",
+        "mediaId": "athen"
+      }
+    ]
+  },
+  {
+    "id": "santorini",
+    "title": "Santorini",
+    "date": "2021-09-17",
+    "tripId": "griechenland",
+    "topicIds": [
+      "meer"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "image",
+        "mediaId": "santorini",
+        "caption": "Sonnenuntergang in Oia"
+      },
+      {
+        "id": "b2",
+        "type": "text",
+        "content": "Beispieltext: Weiße Häuser, blaues Meer und sehr viele Treppen."
+      }
+    ]
+  },
+  {
+    "id": "italien-rundreise",
+    "title": "Von Rom in die Dolomiten",
+    "date": "2018-05",
+    "tripId": "italien",
+    "topicIds": [
+      "kultur",
+      "essen",
+      "berge"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Beispieltext: Drei Wochen, drei ganz verschiedene Landschaften."
+      },
+      {
+        "id": "b2",
+        "type": "gallery",
+        "mediaIds": [
+          "rom",
+          "toskana",
+          "dolomiten"
+        ]
+      },
+      {
+        "id": "b3",
+        "type": "text",
+        "content": "Beispieltext: Am schönsten war der Abend auf dem Weingut in der Toskana."
+      }
+    ]
+  },
+  {
+    "id": "barcelona",
+    "title": "Barcelona",
+    "tripId": "spanien",
+    "topicIds": [
+      "staedte",
+      "kultur"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Beispieltext: Gaudí an jeder Ecke."
+      },
+      {
+        "id": "b2",
+        "type": "image",
+        "mediaId": "barcelona"
+      }
+    ]
+  },
+  {
+    "id": "andalusien",
+    "title": "Andalusien",
+    "tripId": "spanien",
+    "topicIds": [
+      "essen"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "image",
+        "mediaId": "andalusien"
+      },
+      {
+        "id": "b2",
+        "type": "text",
+        "content": "Beispieltext: Tapas, Flamenco und weiße Dörfer."
+      }
+    ]
+  },
+  {
+    "id": "erste-aquarelle",
+    "title": "Meine ersten Aquarelle",
+    "topicIds": [
+      "erinnerungen"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Beispieltext: Eine Erinnerung an die Kinderkunstschule."
+      },
+      {
+        "id": "b2",
+        "type": "image",
+        "mediaId": "aquarell"
+      }
+    ]
+  },
+  {
+    "id": "gedanken-ueber-das-reisen",
+    "title": "Gedanken über das Reisen",
+    "date": "2024",
+    "topicIds": [
+      "gedanken"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Beispieltext: Warum ich reise, und was ich davon mitnehme."
+      },
+      {
+        "id": "b2",
+        "type": "image",
+        "mediaId": "notizbuch"
+      }
+    ]
+  },
+  {
+    "id": "notiz",
+    "title": "Eine lose Notiz",
+    "topicIds": [],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Beispieltext: Ein Eintrag ohne Reise und ohne Thema. Er erscheint in der Gruppe „Ohne Thema\"."
+      }
+    ]
+  },
+  {
+    "id": "am-wasserfall",
+    "title": "Am Wasserfall",
+    "date": "2024",
+    "tripId": "island",
+    "topicIds": [
+      "berge",
+      "meer"
+    ],
+    "blocks": [
+      {
+        "id": "b1",
+        "type": "text",
+        "content": "Den Skógafoss hört man, lange bevor man ihn sieht. Rund 60 Meter stürzt das Wasser über die alte Küstenklippe, und je näher man kommt, desto feiner legt sich die Gischt auf Gesicht und Jacke."
+      },
+      {
+        "id": "b2",
+        "type": "video",
+        "mediaId": "skogafoss",
+        "caption": "Direkt vor dem Skógafoss"
+      },
+      {
+        "id": "b3",
+        "type": "text",
+        "content": "Neben dem Wasserfall führt eine lange Treppe nach oben. Von dort geht der Blick über die flache Ebene bis zum Meer, das hier einmal bis an die Felsen reichte."
+      }
+    ]
+  }
+]

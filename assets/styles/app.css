@@ -1,0 +1,436 @@
+/*
+ * Gestaltung über Variablen (Design-Tokens).
+ * Ein Designstil wie „Calm" oder „Vintage" ändert nur die Werte unter :root –
+ * die Klassen in den Vorlagen und Vue-Komponenten bleiben gleich.
+ * Darum hier keine festen Farben außerhalb von :root.
+ */
+:root {
+    --style-surface: #ffffff;
+    --style-surface-alt: #f5f5f4;
+    --style-text: #1c1917;
+    --style-muted: #78716c;
+    --style-primary: #0f766e;
+    --style-border: #e7e5e4;
+    --style-shadow: rgb(0 0 0 / 0.15);
+    --style-font-heading: ui-sans-serif, system-ui, sans-serif;
+    --style-font-body: ui-sans-serif, system-ui, sans-serif;
+
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-16: 4rem;
+    --radius: 0.25rem;
+    --width-text: 48rem;   /* 768 px – Textseiten */
+    --width-wide: 72rem;   /* 1152 px – Fotos-Seite */
+}
+
+/* ---------- Grundlagen ---------- */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--style-surface);
+    color: var(--style-text);
+    font-family: var(--style-font-body);
+    line-height: 1.6;
+}
+
+h1, h2, h3, p, ul, figure {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img, video {
+    display: block;
+    max-width: 100%;
+}
+
+.muted { color: var(--style-muted); }
+.small { font-size: 0.875rem; }
+.lead { font-size: 1.125rem; }
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* ---------- Layout ---------- */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-8);
+    border-bottom: 1px solid var(--style-border);
+    background: var(--style-surface);
+}
+
+.site-header__brand {
+    font-family: var(--style-font-heading);
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.site-nav {
+    display: flex;
+    gap: var(--space-6);
+}
+
+.site-nav__link {
+    color: var(--style-muted);
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.15s;
+}
+
+.site-nav__link:hover {
+    color: var(--style-text);
+}
+
+.site-nav__link.is-active {
+    color: var(--style-primary);
+    text-decoration: underline;
+    text-underline-offset: 8px;
+}
+
+.site-main {
+    max-width: var(--width-text);
+    margin: 0 auto;
+    padding: var(--space-16) var(--space-8);
+}
+
+.site-main--wide {
+    max-width: var(--width-wide);
+}
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.stack--loose {
+    gap: var(--space-6);
+}
+
+/* ---------- Text ---------- */
+
+.page-title {
+    font-family: var(--style-font-heading);
+    font-size: 1.875rem;
+}
+
+.section-title {
+    margin: var(--space-4) 0 var(--space-2);
+    font-family: var(--style-font-heading);
+    font-size: 1.5rem;
+}
+
+.text-link {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.text-link:hover {
+    color: var(--style-primary);
+}
+
+/* Textlink als Knopf (z. B. „Filter zurücksetzen" in Vue) */
+button.text-link {
+    align-self: flex-start;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--style-muted);
+    font: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+.link-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    color: var(--style-muted);
+}
+
+.link-list a:hover {
+    color: var(--style-primary);
+}
+
+.inline-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-2);
+}
+
+/* ---------- Karten und Zeitleiste ---------- */
+
+.card-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+/* Die ganze Karte ist der Link. */
+.card {
+    display: block;
+    padding: var(--space-4);
+    border: 1px solid var(--style-border);
+    border-radius: var(--radius);
+    transition: border-color 0.15s;
+}
+
+.card:hover,
+.card:focus-visible {
+    border-color: var(--style-primary);
+}
+
+.card__title {
+    font-family: var(--style-font-heading);
+    font-size: 1.25rem;
+}
+
+.card__meta {
+    color: var(--style-muted);
+    font-size: 0.875rem;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.timeline__group {
+    padding-left: var(--space-6);
+    border-left: 2px solid var(--style-border);
+}
+
+.timeline__group .section-title {
+    margin-top: 0;
+}
+
+/* ---------- Blöcke eines Eintrags ---------- */
+
+.block-text {
+    white-space: pre-line;
+}
+
+.block-figure img {
+    width: 100%;
+    border-radius: var(--radius);
+}
+
+.block-figure--video video {
+    max-height: 80vh;
+    margin: 0 auto;
+    border-radius: var(--radius);
+}
+
+.block-figure figcaption {
+    margin-top: var(--space-1);
+    color: var(--style-muted);
+    font-size: 0.875rem;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+}
+
+.tile-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+/* ---------- Fotos ---------- */
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+}
+
+.filters select {
+    width: 100%;
+    padding: var(--space-2) 0.75rem;
+    border: 1px solid var(--style-border);
+    border-radius: var(--radius);
+    background: var(--style-surface);
+    color: var(--style-text);
+    font: inherit;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+    transition: opacity 0.15s;
+}
+
+/* Während Vue neue Fotos lädt */
+.photo-grid.is-loading {
+    opacity: 0.5;
+}
+
+.tile {
+    position: relative;
+}
+
+.tile-info {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+}
+
+/* Info-Knopf: <summary> ohne JavaScript, <button> in Vue */
+.tile-info__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-left: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--style-surface) 90%, transparent);
+    box-shadow: 0 1px 3px var(--style-shadow);
+    color: var(--style-text);
+    font-family: var(--style-font-heading);
+    font-size: 0.875rem;
+    font-style: italic;
+    cursor: pointer;
+    list-style: none;
+}
+
+.tile-info__button::-webkit-details-marker {
+    display: none;
+}
+
+.tile-info__button:hover,
+.tile-info__button[aria-expanded="true"],
+.tile-info[open] .tile-info__button {
+    color: var(--style-primary);
+}
+
+.tile-info__panel {
+    position: absolute;
+    top: 2.25rem;
+    right: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    width: 14rem;
+    padding: 0.75rem;
+    border: 1px solid var(--style-border);
+    border-radius: var(--radius);
+    background: var(--style-surface);
+    box-shadow: 0 2px 8px var(--style-shadow);
+    font-size: 0.875rem;
+}
+
+/* Abstand nach „Ort:", „Reise:", „Themen:" – Vue entfernt Leerzeichen zwischen zwei Elementen */
+.tile-info__panel .muted {
+    margin-right: var(--space-1);
+}
+
+/* ---------- Formular und Knöpfe ---------- */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.field label {
+    font-size: 0.875rem;
+}
+
+.field input,
+.field textarea {
+    padding: var(--space-2) 0.75rem;
+    border: 1px solid var(--style-border);
+    border-radius: var(--radius);
+    background: var(--style-surface);
+    color: var(--style-text);
+    font: inherit;
+}
+
+.field [aria-invalid="true"] {
+    border-color: var(--style-primary);
+}
+
+.field__error {
+    color: var(--style-primary);
+    font-size: 0.875rem;
+}
+
+/* Zeichenzähler unter der Nachricht (Vue) */
+.field__hint {
+    align-self: flex-end;
+    color: var(--style-muted);
+    font-size: 0.75rem;
+}
+
+.button {
+    align-self: flex-start;
+    display: inline-block;
+    padding: var(--space-2) var(--space-6);
+    border: 1px solid var(--style-primary);
+    border-radius: var(--radius);
+    background: var(--style-primary);
+    color: var(--style-surface);
+    font: inherit;
+    cursor: pointer;
+}
+
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.button--secondary {
+    border-color: var(--style-border);
+    background: transparent;
+    color: var(--style-text);
+}
+
+.button--secondary:hover {
+    border-color: var(--style-primary);
+    color: var(--style-primary);
+}

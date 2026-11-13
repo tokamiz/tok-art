@@ -1,0 +1,5 @@
+# Nur in der Entwicklung: leitet /build/… an den Vite-Server weiter.
+when@dev:
+    _pentatrion_vite:
+        prefix: /build
+        resource: "@PentatrionViteBundle/Resources/config/routing.yaml"

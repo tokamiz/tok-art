@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Themen{% endblock %}
+
+{% block body %}
+    <section class="stack">
+        <h1 class="page-title">Themen</h1>
+
+        <ul class="link-list">
+            {% for topic in topics %}
+                <li><a href="{{ path('topic_show', {id: topic.id}) }}">{{ topic.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+        {% if looseEntries is not empty %}
+            <h2 class="section-title">Ohne Thema</h2>
+            <ul class="link-list">
+                {% for entry in looseEntries %}
+                    <li><a href="{{ path('entry_show', {id: entry.id}) }}">{{ entry.title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </section>
+{% endblock %}

@@ -1,0 +1,12 @@
+{# Eigene 404-Seite (im Entwicklungsmodus zeigt Symfony stattdessen die Debug-Seite). #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Nicht gefunden{% endblock %}
+
+{% block body %}
+    <section class="stack">
+        <h1 class="page-title">Nicht gefunden</h1>
+        <p>Diese Seite gibt es nicht (mehr).</p>
+        <a href="{{ path('home') }}" class="text-link">Zur Startseite</a>
+    </section>
+{% endblock %}

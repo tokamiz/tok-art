@@ -1,0 +1,229 @@
+[
+  {
+    "id": "helsinki",
+    "kind": "image",
+    "filePath": "/media/helsinki.svg",
+    "date": "2019-07-12",
+    "place": "Helsinki, Finnland",
+    "topicIds": [
+      "staedte",
+      "meer"
+    ],
+    "keywordIds": [
+      "kaffee"
+    ]
+  },
+  {
+    "id": "lappland",
+    "kind": "image",
+    "filePath": "/media/lappland.svg",
+    "date": "2019-07",
+    "place": "Lappland, Finnland",
+    "topicIds": [
+      "berge"
+    ],
+    "keywordIds": [
+      "tier"
+    ]
+  },
+  {
+    "id": "stockholm",
+    "kind": "image",
+    "filePath": "/media/stockholm.svg",
+    "date": "2019-07-26",
+    "place": "Stockholm, Schweden",
+    "topicIds": [
+      "staedte"
+    ]
+  },
+  {
+    "id": "schaeren",
+    "kind": "image",
+    "filePath": "/media/schaeren.svg",
+    "date": "2019-07-28",
+    "place": "Stockholmer Schären, Schweden",
+    "topicIds": [
+      "meer"
+    ],
+    "keywordIds": [
+      "tier"
+    ]
+  },
+  {
+    "id": "st-petersburg",
+    "kind": "image",
+    "filePath": "/media/st-petersburg.svg",
+    "date": "2016",
+    "place": "St. Petersburg, Russland",
+    "topicIds": [
+      "staedte",
+      "kultur"
+    ],
+    "keywordIds": [
+      "museum",
+      "theater"
+    ]
+  },
+  {
+    "id": "kaukasus",
+    "kind": "image",
+    "filePath": "/media/kaukasus.svg",
+    "date": "2016",
+    "place": "Kasbegi, Georgien",
+    "topicIds": [
+      "berge"
+    ],
+    "keywordIds": [
+      "wasserfall",
+      "tier"
+    ]
+  },
+  {
+    "id": "tiflis",
+    "kind": "image",
+    "filePath": "/media/tiflis.svg",
+    "date": "2016",
+    "place": "Tiflis, Georgien",
+    "topicIds": [
+      "staedte",
+      "essen"
+    ]
+  },
+  {
+    "id": "istanbul",
+    "kind": "image",
+    "filePath": "/media/istanbul.svg",
+    "date": "2016",
+    "place": "Istanbul, Türkei",
+    "topicIds": [
+      "staedte",
+      "kultur"
+    ],
+    "keywordIds": [
+      "kaffee"
+    ]
+  },
+  {
+    "id": "warna",
+    "kind": "image",
+    "filePath": "/media/warna.svg",
+    "date": "2016",
+    "place": "Warna, Bulgarien",
+    "topicIds": [
+      "meer"
+    ]
+  },
+  {
+    "id": "athen",
+    "kind": "image",
+    "filePath": "/media/athen.svg",
+    "date": "2021-09-11",
+    "place": "Athen, Griechenland",
+    "topicIds": [
+      "kultur",
+      "staedte"
+    ],
+    "keywordIds": [
+      "museum",
+      "theater"
+    ]
+  },
+  {
+    "id": "santorini",
+    "kind": "image",
+    "filePath": "/media/santorini.svg",
+    "date": "2021-09-17",
+    "place": "Santorini, Griechenland",
+    "topicIds": [
+      "meer"
+    ]
+  },
+  {
+    "id": "rom",
+    "kind": "image",
+    "filePath": "/media/rom.svg",
+    "date": "2018-05",
+    "place": "Rom, Italien",
+    "topicIds": [
+      "kultur",
+      "staedte"
+    ],
+    "keywordIds": [
+      "museum",
+      "kaffee"
+    ]
+  },
+  {
+    "id": "toskana",
+    "kind": "image",
+    "filePath": "/media/toskana.svg",
+    "date": "2018-05",
+    "place": "Toskana, Italien",
+    "topicIds": [
+      "essen"
+    ],
+    "keywordIds": [
+      "kaffee"
+    ]
+  },
+  {
+    "id": "dolomiten",
+    "kind": "image",
+    "filePath": "/media/dolomiten.svg",
+    "date": "2018-05",
+    "place": "Dolomiten, Italien",
+    "topicIds": [
+      "berge"
+    ]
+  },
+  {
+    "id": "barcelona",
+    "kind": "image",
+    "filePath": "/media/barcelona.svg",
+    "place": "Barcelona, Spanien",
+    "topicIds": [
+      "staedte",
+      "kultur"
+    ]
+  },
+  {
+    "id": "andalusien",
+    "kind": "image",
+    "filePath": "/media/andalusien.svg",
+    "place": "Andalusien, Spanien",
+    "topicIds": [
+      "essen"
+    ]
+  },
+  {
+    "id": "aquarell",
+    "kind": "image",
+    "filePath": "/media/aquarell.svg",
+    "topicIds": [
+      "erinnerungen"
+    ]
+  },
+  {
+    "id": "notizbuch",
+    "kind": "image",
+    "filePath": "/media/notizbuch.svg",
+    "date": "2024",
+    "topicIds": [
+      "gedanken"
+    ]
+  },
+  {
+    "id": "skogafoss",
+    "kind": "video",
+    "filePath": "/media/island.mp4",
+    "date": "2024",
+    "place": "Skógafoss, Island",
+    "topicIds": [
+      "berge",
+      "meer"
+    ],
+    "keywordIds": [
+      "wasserfall"
+    ]
+  }
+]

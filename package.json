@@ -1,0 +1,25 @@
+{
+    "name": "tok-art-projekt",
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "typecheck": "vue-tsc --noEmit",
+        "test": "vitest run",
+        "test:watch": "vitest"
+    },
+    "dependencies": {
+        "vue": "^3.5.45"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^6.0.11",
+        "@vue/test-utils": "^2.5.1",
+        "happy-dom": "^21.0.4",
+        "typescript": "~6.0.3",
+        "vite": "^8.3.8",
+        "vite-plugin-symfony": "^8.2.4",
+        "vitest": "^5.1.0",
+        "vue-tsc": "^3.3.14"
+    }
+}

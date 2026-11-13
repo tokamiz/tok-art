@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../vendor/symfony/dependency-injection/Loader/schema/services.schema.json
+
+# Einstieg für die eigenen Services.
+# Konfiguration der installierten Pakete liegt in config/packages/.
+
+parameters:
+    # Beispielinhalte als JSON (entspricht server/data/ im Nuxt-Projekt)
+    app.data_dir: '%kernel.project_dir%/data'
+    # Kontaktnachrichten; var/ ist nicht in Git. Getrennt je Umgebung (dev, test, prod).
+    app.contact_dir: '%kernel.project_dir%/var/contact/%kernel.environment%'
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            # Domain: reine Klassen und Wertobjekte, keine Services
+            - '../src/Domain/'
+            - '../src/Kernel.php'
+
+    App\Content\JsonContentSource:
+        arguments:
+            $dataDir: '%app.data_dir%'
+
+    App\Contact\FileContactInbox:
+        arguments:
+            $directory: '%app.contact_dir%'
+
+    # Austauschpunkte: Eine andere Inhaltsquelle oder Ablage ist jeweils eine Zeile.
+    # Inhalte und Nachrichten kommen aus MariaDB (gepflegt unter /admin).
+    # Vorher, ohne Datenbank: JsonContentSource (data/*.json) und FileContactInbox (var/contact/).
+    App\Domain\ContentSource: '@App\Content\DoctrineContentSource'
+    App\Domain\Contact\ContactInbox: '@App\Contact\DoctrineContactInbox'

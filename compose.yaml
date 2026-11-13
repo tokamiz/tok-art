@@ -1,0 +1,54 @@
+services:
+  # PHP mit Symfony → http://localhost:8000
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - composer-cache:/root/.composer/cache
+    depends_on:
+      - db
+
+  # MariaDB in derselben Version wie bei STRATO → nur für die Container erreichbar
+  # (von außen zum Ansehen mit einem DB-Programm: localhost:3307, Benutzer tokart / tokart)
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_DATABASE: tokart
+      MARIADB_USER: tokart
+      MARIADB_PASSWORD: tokart
+      MARIADB_ROOT_PASSWORD: root
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./docker/mariadb:/docker-entrypoint-initdb.d:ro
+
+  # Vite für Vue, TypeScript und CSS → Dateien unter http://localhost:5180, mit Hot Reload
+  node:
+    image: node:24-slim
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "5180:5180"
+    volumes:
+      - .:/app
+
+  # Nur für `make release-test`: der Release-Ordner unter Apache wie bei STRATO → http://localhost:8080
+  strato-test:
+    profiles: ["release"]
+    build: docker/apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ./release:/var/www/app
+    environment:
+      # Statt der STRATO-Zugangsdaten aus .env.local.php: die lokale Datenbank
+      DATABASE_URL: "mysql://tokart:tokart@db:3306/tokart?serverVersion=10.11.0-MariaDB&charset=utf8mb4"
+    depends_on:
+      - db
+
+volumes:
+  composer-cache:
+  db-data:

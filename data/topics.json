@@ -1,0 +1,30 @@
+[
+  {
+    "id": "berge",
+    "name": "Berge"
+  },
+  {
+    "id": "meer",
+    "name": "Meer"
+  },
+  {
+    "id": "staedte",
+    "name": "Städte"
+  },
+  {
+    "id": "essen",
+    "name": "Essen"
+  },
+  {
+    "id": "kultur",
+    "name": "Kultur"
+  },
+  {
+    "id": "erinnerungen",
+    "name": "Erinnerungen"
+  },
+  {
+    "id": "gedanken",
+    "name": "Gedanken"
+  }
+]

@@ -1,0 +1,20 @@
+# Statische Analyse: findet Typfehler, ohne den Code auszuführen (entspricht `nuxi typecheck`).
+includes:
+    # kennt Doctrine-Entitäten (z. B. von der Datenbank vergebene IDs, Repository-Rückgabetypen)
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    # kennt den Symfony-Container (welcher Typ bei get(...) zurückkommt)
+    - vendor/phpstan/phpstan-symfony/extension.neon
+
+parameters:
+    level: 8
+    paths:
+        - src
+        - tests
+    excludePaths:
+        - tests/bootstrap.php
+        - tests/phpstan/
+    doctrine:
+        objectManagerLoader: tests/phpstan/object-manager.php
+    symfony:
+        # entsteht beim ersten Aufruf der App bzw. mit `php bin/console cache:warmup`
+        containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml

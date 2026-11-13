@@ -1,0 +1,24 @@
+{#
+    Zeitleiste: Einträge nach Jahr gruppiert, „Ohne Datum" am Ende.
+    Wird von Reise- und Themenseiten genutzt (entspricht EntryTimeline.vue).
+    Erwartet: entries (Liste von Entry)
+#}
+<div class="timeline">
+    {% for group in group_by_year(entries) %}
+        <section class="timeline__group">
+            <h2 class="section-title">{{ group.year ?? 'Ohne Datum' }}</h2>
+            <ul class="card-list">
+                {% for entry in group.entries %}
+                    <li>
+                        <a href="{{ path('entry_show', {id: entry.id}) }}" class="card">
+                            <h3 class="card__title">{{ entry.title }}</h3>
+                            {% if entry.date %}
+                                <p class="card__meta">{{ entry.date|date_de }}</p>
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endfor %}
+</div>

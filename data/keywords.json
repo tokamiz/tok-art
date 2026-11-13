@@ -1,0 +1,22 @@
+[
+  {
+    "id": "wasserfall",
+    "name": "Wasserfall"
+  },
+  {
+    "id": "tier",
+    "name": "Tier"
+  },
+  {
+    "id": "museum",
+    "name": "Museum"
+  },
+  {
+    "id": "theater",
+    "name": "Theater"
+  },
+  {
+    "id": "kaffee",
+    "name": "Kaffee"
+  }
+]

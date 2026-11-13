@@ -1,0 +1,40 @@
+{#
+    Eine Kachel der Fotos-Seite (entspricht PhotoTile.vue).
+    Foto mit Link zum Eintrag und ein Info-Icon mit Ort, Reise und Themen.
+    Das Info-Fenster nutzt <details>: auf- und zuklappbar ohne JavaScript, jede Kachel für sich.
+    Erwartet: photo, entry (oder null), trip (oder null), topics
+#}
+<div class="tile">
+    {% if entry %}
+        <a href="{{ path('entry_show', {id: entry.id}) }}">
+            <img src="{{ asset(photo.filePath|trim('/', 'left')) }}" alt="{{ photo.place ?? '' }}" class="tile-image">
+        </a>
+    {% else %}
+        <img src="{{ asset(photo.filePath|trim('/', 'left')) }}" alt="{{ photo.place ?? '' }}" class="tile-image">
+    {% endif %}
+
+    <details class="tile-info">
+        <summary class="tile-info__button" aria-label="Infos zum Foto">i</summary>
+        <div class="tile-info__panel">
+            {% if photo.place %}
+                <p><span class="muted">Ort:</span> {{ photo.place }}</p>
+            {% endif %}
+            {% if trip %}
+                <p>
+                    <span class="muted">Reise:</span>
+                    <a href="{{ path('trip_show', {id: trip.id}) }}" class="text-link">{{ trip.title }}</a>
+                </p>
+            {% endif %}
+            {% if topics is not empty %}
+                <div>
+                    <span class="muted">Themen:</span>
+                    <ul class="inline-list">
+                        {% for topic in topics %}
+                            <li><a href="{{ path('topic_show', {id: topic.id}) }}" class="text-link">{{ topic.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </details>
+</div>

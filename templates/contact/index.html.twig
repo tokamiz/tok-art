@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Kontakt{% endblock %}
+
+{% macro field_error(errors, name) %}
+    {% if errors[name] is defined %}
+        <p id="{{ name }}-error" class="field__error">{{ errors[name] }}</p>
+    {% endif %}
+{% endmacro %}
+
+{% block body %}
+    {% import _self as f %}
+    <section class="stack">
+        <h1 class="page-title">Kontakt</h1>
+
+        {#
+            Vue-Insel: Mit JavaScript übernimmt die Komponente ContactForm und sendet ohne Neuladen an /api/contact.
+            Ohne JavaScript bleibt das HTML-Formular darunter mit normalem POST an /contact.
+            Der Browser prüft vorab (required, type="email", maxlength); verbindlich ist die Prüfung auf dem Server.
+        #}
+        {% set token = csrf_token(csrfId) %}
+        <div data-vue-component="ContactForm" data-props="{{ {
+            endpoint: path('api_contact'),
+            csrfToken: token,
+            honeypot: honeypot,
+            maxName: maxName,
+            maxMessage: maxMessage,
+            initial: {name: form.name, email: form.email, message: form.message},
+            initialErrors: errors,
+        }|json_encode }}">
+        <form method="post" action="{{ path('contact') }}" class="form">
+            <input type="hidden" name="_token" value="{{ token }}">
+
+            {# Unsichtbares Feld gegen Spam: Menschen sehen es nicht, Bots füllen es aus. #}
+            <div class="visually-hidden" aria-hidden="true">
+                <label for="{{ honeypot }}">Website</label>
+                <input type="text" id="{{ honeypot }}" name="{{ honeypot }}" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="field">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" value="{{ form.name }}"
+                       required maxlength="{{ maxName }}" autocomplete="name"
+                       {% if errors.name is defined %}aria-invalid="true" aria-describedby="name-error"{% endif %}>
+                {{ f.field_error(errors, 'name') }}
+            </div>
+
+            <div class="field">
+                <label for="email">E-Mail</label>
+                <input type="email" id="email" name="email" value="{{ form.email }}"
+                       required autocomplete="email"
+                       {% if errors.email is defined %}aria-invalid="true" aria-describedby="email-error"{% endif %}>
+                {{ f.field_error(errors, 'email') }}
+            </div>
+
+            <div class="field">
+                <label for="message">Nachricht</label>
+                <textarea id="message" name="message" rows="6" required maxlength="{{ maxMessage }}"
+                          {% if errors.message is defined %}aria-invalid="true" aria-describedby="message-error"{% endif %}>{{ form.message }}</textarea>
+                {{ f.field_error(errors, 'message') }}
+            </div>
+
+            <p class="muted small">
+                Deine Angaben werden nur gespeichert, um deine Nachricht zu beantworten, und nicht weitergegeben.
+            </p>
+
+            {% if failed %}
+                <p class="field__error">Die Nachricht konnte nicht gesendet werden. Bitte lade die Seite neu und versuch es noch einmal.</p>
+            {% endif %}
+
+            <button type="submit" class="button">Senden</button>
+        </form>
+        </div>
+    </section>
+{% endblock %}

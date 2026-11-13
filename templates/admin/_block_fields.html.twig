@@ -1,0 +1,36 @@
+{#
+    Block-Editor in der Verwaltung (EntryCrudController): zeigt je Block nur die Felder, die zur gewählten
+    Art passen. Ohne JavaScript stehen alle Felder da – der Server prüft ohnehin (Block::validateForType()).
+#}
+<script>
+(() => {
+    // Feldname → Blockarten, bei denen das Feld gebraucht wird
+    const fields = {
+        content: ['text'],
+        media: ['image', 'video'],
+        caption: ['image', 'video'],
+        galleryMediaIds: ['gallery'],
+    };
+
+    function update(typeSelect) {
+        const prefix = typeSelect.id.replace(/_type$/, '');
+        for (const [name, types] of Object.entries(fields)) {
+            const input = document.getElementById(`${prefix}_${name}`);
+            const column = input?.closest('.form-group')?.parentElement;
+            if (column) {
+                column.hidden = !types.includes(typeSelect.value);
+            }
+        }
+    }
+
+    const isBlockType = (el) => el instanceof HTMLSelectElement && /_blocks_\d+_type$/.test(el.id);
+
+    function updateAll() {
+        document.querySelectorAll('select[id$="_type"]').forEach((el) => isBlockType(el) && update(el));
+    }
+
+    document.addEventListener('change', (event) => isBlockType(event.target) && update(event.target));
+    document.addEventListener('ea.collection.item-added', () => setTimeout(updateAll));
+    document.addEventListener('DOMContentLoaded', updateAll);
+})();
+</script>

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Thema: {{ topic.name }}{% endblock %}
+
+{% block body %}
+    <section class="stack">
+        <h1 class="page-title">Thema: {{ topic.name }}</h1>
+
+        {% if entries is empty %}
+            <p class="muted">Keine Einträge für dieses Thema.</p>
+        {% else %}
+            {{ include('_timeline.html.twig', {entries: entries}) }}
+        {% endif %}
+    </section>
+{% endblock %}
