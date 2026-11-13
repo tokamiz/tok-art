@@ -164,6 +164,28 @@ final class AdminTest extends WebTestCase
         self::assertNotNull($this->em()->find(Media::class, 'athen'));
     }
 
+    public function testLoeschenEntferntEigeneDateienAberNieBeispieldateien(): void
+    {
+        $client = $this->loggedIn();
+        $mediaDir = \dirname(__DIR__, 2).'/public/media';
+        $ownFile = 'test-eigenes-foto.svg';
+        copy($mediaDir.'/rom.svg', $mediaDir.'/'.$ownFile);
+
+        $em = $this->em();
+        $em->persist((new Media())->setId('test-eigen')->setFile($ownFile));
+        $em->persist((new Media())->setId('test-beispiel')->setFile('rom.svg'));
+        $em->flush();
+
+        $token = $client->request('GET', '/admin/media')->filter('input[type="hidden"][name="token"]')->attr('value');
+        $client->request('POST', '/admin/media/test-eigen/delete', ['token' => $token]);
+        $client->request('POST', '/admin/media/test-beispiel/delete', ['token' => $token]);
+
+        self::assertFileDoesNotExist($mediaDir.'/'.$ownFile, 'eigene Datei wird mitgelöscht');
+        self::assertFileExists($mediaDir.'/rom.svg', 'Beispieldatei bleibt für die Tests erhalten');
+        $this->em()->clear();
+        self::assertNull($this->em()->find(Media::class, 'test-beispiel'));
+    }
+
     public function testLoeschenEinesEintragsEntferntSeineBloecke(): void
     {
         $em = $this->em();

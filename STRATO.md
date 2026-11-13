@@ -70,6 +70,16 @@ Unter den PHP-Einstellungen des Pakets **PHP 8.3** wählen (mindestens 8.2). Das
 
 In den PHP-Einstellungen bzw. der Liste der Erweiterungen nachsehen und bei Bedarf einschalten. Ist das nicht möglich: beim STRATO-Support nachfragen, **bevor** du hochlädst.
 
+**Upload-Grenzen:** PHP nimmt ohne Anpassung oft nur wenige MB pro Datei an; Handyfotos haben 3–10 MB. In den PHP-Einstellungen nach Möglichkeit setzen (wie lokal in `docker/php/uploads.ini`):
+
+| Einstellung | Wert |
+|---|---|
+| `upload_max_filesize` | 50M |
+| `post_max_size` | 55M |
+| `memory_limit` | 512M (GD braucht für große Fotos viel Speicher) |
+
+Sind höhere Werte nicht möglich: Fotos vor dem Upload auf ca. 2000 Pixel verkleinern.
+
 **Warum es für `intl` keinen Ersatz gibt:** Das Ersatzpaket `symfony/polyfill-intl-icu` unterstützt nur Englisch. Deutsche Monatsnamen und die richtige Einordnung von Umlauten („Ägypten" vor „Zug") gehen nur mit der echten Erweiterung.
 
 ### 1.3 Ordner und Zielverzeichnis der Domain

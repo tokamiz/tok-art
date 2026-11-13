@@ -7,6 +7,8 @@ services:
     volumes:
       - .:/app
       - composer-cache:/root/.composer/cache
+      # Upload-Grenzen und Speicher für die Bildverarbeitung
+      - ./docker/php/uploads.ini:/usr/local/etc/php/conf.d/zz-uploads.ini:ro
     depends_on:
       - db
 
@@ -43,6 +45,7 @@ services:
       - "8080:80"
     volumes:
       - ./release:/var/www/app
+      - ./docker/php/uploads.ini:/usr/local/etc/php/conf.d/zz-uploads.ini:ro
     environment:
       # Statt der STRATO-Zugangsdaten aus .env.local.php: die lokale Datenbank
       DATABASE_URL: "mysql://tokart:tokart@db:3306/tokart?serverVersion=10.11.0-MariaDB&charset=utf8mb4"

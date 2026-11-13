@@ -132,7 +132,7 @@ Fehlt etwas (z. B. ein Bildblock ohne Foto), zeigt das Formular beim Speichern e
 | Eintrag | wird mit seinen Blöcken gelöscht |
 | Reise | Einträge bleiben, verlieren nur die Reise (erscheinen dann unter „Themen") |
 | Thema, Schlagwort | nur die Zuordnung verschwindet |
-| Foto oder Video | **nur möglich, wenn es in keinem Eintrag mehr vorkommt** – sonst nennt eine Meldung die Einträge. Beim Löschen verschwindet auch die Datei. |
+| Foto oder Video | **nur möglich, wenn es in keinem Eintrag mehr vorkommt** – sonst nennt eine Meldung die Einträge. Beim Löschen verschwindet auch die Datei – außer bei den Beispielmedien aus `data/media.json`: deren Dateien bleiben, weil die Testdatenbank sie braucht. |
 | Nachricht | wird gelöscht – beantwortete Nachrichten bitte löschen (Datenschutz) |
 
 ---
@@ -154,6 +154,12 @@ Die Metadaten werden dafür nur gelesen (Drehung) und danach verworfen – nie g
 
 **SVG** wird nicht angenommen (SVG-Dateien können Skripte enthalten).
 
+**HEIC** (Standardformat des iPhones) wird nicht angenommen. Fotos als **JPEG** exportieren (Fotos-App: Ablage → Exportieren → „JPEG") oder am iPhone unter Einstellungen → Kamera → Formate „Maximale Kompatibilität" wählen.
+
+**Größe:** bis 50 MB pro Datei (lokal in `docker/php/uploads.ini` eingestellt). Auf dem Server gilt die PHP-Einstellung von STRATO (STRATO.md, Abschnitt 1.2).
+
+**Eigene Fotos stehen nicht in Git:** `public/media/*` ist in `.gitignore`. Nur die 19 Beispielmedien (für die Tests) sind versioniert. Eigene Fotos und Videos deshalb regelmäßig sichern, z. B. nach HiDrive.
+
 ---
 
 ## 5. Wo die Daten liegen
@@ -167,6 +173,15 @@ Die Metadaten werden dafür nur gelesen (Drehung) und danach verworfen – nie g
 | `data/*.json` | nur noch **Startinhalte**: `make setup` bzw. `bin/console app:import-json` übernimmt sie in eine leere Datenbank; außerdem Grundlage der Testdatenbank |
 
 Die lokale Datenbank liegt im Docker-Volume `db-data` und bleibt bei `make down` erhalten. Zum Ansehen mit einem Datenbankprogramm: `localhost:3307`, Benutzer `tokart`, Passwort `tokart` (nur lokal erreichbar).
+
+**Achtung – nicht in Git, also selbst sichern:**
+- Die **Datenbank** steckt nur im Docker-Volume. `docker compose down -v`, „Clean / Purge data" in Docker Desktop oder ein Neuaufsetzen von Docker löschen sie. Sicherung: `make db-export` (Inhalte als SQL in `deploy/sql/`).
+- **Eigene Fotos und Videos** in `public/media/`.
+- Beides regelmäßig nach HiDrive kopieren, solange lokal gepflegt wird.
+
+**Text „Über mich":** steht nicht in der Datenbank, sondern in `templates/home/index.html.twig` und wird dort bearbeitet.
+
+**Beispielinhalte entfernen:** in der Verwaltung löschen (erst die Einträge, dann Fotos, Reisen, Themen). `data/*.json` und die Beispieldateien in `public/media/` bleiben dabei unberührt – sie sind die Startinhalte der Testdatenbank, `make test` funktioniert also weiter.
 
 ---
 

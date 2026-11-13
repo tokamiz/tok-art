@@ -17,6 +17,12 @@
 /public/build/
 ###< vite ###
 
+###> eigene Fotos ###
+# Uploads aus der Verwaltung sind private Inhalte und gehören nicht in Git (Sicherung: HiDrive).
+# Die bereits versionierten Beispielmedien (data/media.json) bleiben trotzdem in Git.
+/public/media/*
+###< eigene Fotos ###
+
 ###> release ###
 /release/
 /deploy/.env.local

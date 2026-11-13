@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Content\JsonContentSource;
 use App\Entity\Block;
 use App\Entity\Media;
 use App\Media\ImageSanitizer;
@@ -30,6 +31,8 @@ final class MediaCrudController extends AbstractCrudController
 
     public function __construct(
         private readonly ImageSanitizer $sanitizer,
+        /** Beispielinhalte aus data/ – deren Dateien werden nie gelöscht */
+        private readonly JsonContentSource $samples,
         #[Autowire('%kernel.project_dir%')]
         private readonly string $projectDir,
     ) {
@@ -102,11 +105,24 @@ final class MediaCrudController extends AbstractCrudController
         $file = (string) $entityInstance->getFile();
         parent::deleteEntity($entityManager, $entityInstance);
 
-        // Datei mit löschen, wenn kein anderes Medium sie nutzt
+        // Datei mit löschen, wenn kein anderes Medium sie nutzt – außer den Beispielmedien aus data/media.json:
+        // Die braucht die Testdatenbank, sie bleiben als Dateien erhalten.
         $path = $this->projectDir.'/'.self::UPLOAD_DIR.'/'.basename($file);
-        if ('' !== $file && is_file($path) && 0 === $entityManager->getRepository(Media::class)->count(['file' => $file])) {
+        if ('' !== $file && is_file($path) && !$this->isSampleFile($file)
+            && 0 === $entityManager->getRepository(Media::class)->count(['file' => $file])) {
             unlink($path);
         }
+    }
+
+    private function isSampleFile(string $file): bool
+    {
+        foreach ($this->samples->mediaItems() as $item) {
+            if (basename($item->filePath) === basename($file)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /** @return list<string> Titel der Einträge, die das Medium zeigen */

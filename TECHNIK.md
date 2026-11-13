@@ -87,6 +87,7 @@ Twig → HTML ──► im Browser: assets/app.ts hängt Vue-Komponenten ein
 | `docker/mariadb/init.sql` | beim ersten Start: Datenbank `tokart_test` für PHPUnit und Rechte für den Benutzer `tokart` |
 | `docker/router.php` | Router für den eingebauten PHP-Server |
 | `docker/apache/Dockerfile` | `php:8.3-apache` wie bei STRATO, für `make release-test` |
+| `docker/php/uploads.ini` | in beide PHP-Container eingebunden: `upload_max_filesize = 50M`, `post_max_size = 55M`, `memory_limit = 512M` (ohne sie nimmt PHP nur 2 MB an) |
 
 **PHP-Server:** `php -S 0.0.0.0:8000 -t public docker/router.php` – das Router-Skript gibt vorhandene Dateien direkt aus und alles andere an Symfony. Nur Entwicklung.
 
@@ -290,7 +291,7 @@ Routen folgen dem Muster `admin_<entity>_<action>` (z. B. `admin_entry_edit` →
 
 ### Löschschutz für Medien
 
-`MediaCrudController::deleteEntity()` sucht das Medium in Bild-, Video- und Galerieblöcken. Wird es noch benutzt, erscheint eine Meldung mit den Einträgen und nichts wird gelöscht; zusätzlich verhindert `ON DELETE RESTRICT` in der Datenbank das Löschen eines Mediums mit Bild-/Videoblock. Nach dem Löschen wird die Datei entfernt, wenn kein anderes Medium sie nutzt.
+`MediaCrudController::deleteEntity()` sucht das Medium in Bild-, Video- und Galerieblöcken. Wird es noch benutzt, erscheint eine Meldung mit den Einträgen und nichts wird gelöscht; zusätzlich verhindert `ON DELETE RESTRICT` in der Datenbank das Löschen eines Mediums mit Bild-/Videoblock. Nach dem Löschen wird die Datei entfernt, wenn kein anderes Medium sie nutzt – **außer** bei Dateien der Beispielmedien aus `data/media.json`, die die Testdatenbank braucht.
 
 ### Anmeldung
 
@@ -388,7 +389,7 @@ Twig-Erweiterung `AppExtension`: Filter `date_de`, Funktionen `is_active_tab()`,
 | Anmeldung | Passwort-Hash, mind. 12 Zeichen, 5 Versuche pro Minute |
 | Uploads | Typen begrenzt, SVG ausgeschlossen, Metadaten entfernt, zufälliger Dateiname |
 | Datenbank | Zugangsdaten nur in `.env.local.php` (Server) bzw. `deploy/.env.local` (lokal, nicht in Git); von außen nur `127.0.0.1:3307` |
-| Keine Daten in Git | `var/`, `.env.local`, `deploy/.env.local`, `deploy/sql/`, `node_modules/`, `public/build/`, `release/` |
+| Keine Daten in Git | `var/`, `.env.local`, `deploy/.env.local`, `deploy/sql/`, `node_modules/`, `public/build/`, `release/`, **`public/media/*`** (eigene Fotos; die 19 Beispielmedien bleiben versioniert) |
 | Sitzung nur bei Bedarf | `lazy: true` |
 | `.htaccess` | HTTPS, `/build/.vite/` gesperrt, Sicherheits-Header |
 
@@ -408,7 +409,7 @@ tests/
 assets/vue/                query.test.ts, PhotoTile.test.ts, ContactForm.test.ts
 ```
 
-Stand: **96 PHP-Tests** (373 Zusicherungen) und **13 Vue-Tests**.
+Stand: **97 PHP-Tests** (377 Zusicherungen) und **13 Vue-Tests**.
 
 | Art | Beispiele |
 |---|---|
@@ -509,3 +510,6 @@ Geprüft (13.11.2026) unter Apache im Produktionsmodus: Seiten, 404, `.htaccess`
 - **`.htaccess`:** `[R=404,L]` führte zu 500, `[F]` (403) funktioniert; ein 500 direkt nach dem Kopieren kam von einer halb übertragenen Datei.
 - **`json_encode([])` ergibt `[]`**, nicht `{}` – Vue-Props, die ein Objekt erwarten, müssen beides annehmen.
 - **Vue entfernt Leerzeichen zwischen zwei Elementen** – Abstände aus dem CSS.
+- **PHP-Grenzen im Docker-Image:** Die offiziellen PHP-Images haben keine `php.ini`; es gelten 2 MB pro Upload und 128 MB Speicher. Für Handyfotos zu wenig – deshalb `docker/php/uploads.ini`. Auf STRATO in den PHP-Einstellungen entsprechend setzen.
+- **Eigene Fotos und Git:** Uploads landen in `public/media/`, wo auch die versionierten Beispielmedien liegen. `/public/media/*` in `.gitignore` hält neue Dateien aus Git heraus, ohne die bereits versionierten zu entfernen.
+- **Beispieldateien beim Löschen schützen:** Würde die Verwaltung die Beispiel-SVGs mitlöschen, fänden die Tests ihre Dateien nicht mehr.
