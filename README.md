@@ -6,7 +6,7 @@ Alle Daten bleiben bei mir: keine externen Dienste, keine Cookies auf den öffen
 
 | Dokument | Inhalt |
 |---|---|
-| [VERWALTUNG.md](VERWALTUNG.md) | Bedienung der Verwaltung; warum EasyAdmin und MariaDB (statt Strapi und PostgreSQL) |
+| [VERWALTUNG.md](VERWALTUNG.md) | Bedienung der Verwaltung, **Checkliste vor echten Inhalten** (Abschnitt 2); warum EasyAdmin und MariaDB (statt Strapi und PostgreSQL) |
 | [TECHNIK.md](TECHNIK.md) | Aufbau, Datenbank, Sicherheit, Tests, Entscheidungen, Hinweise aus der Einrichtung |
 | [STRATO.md](STRATO.md) | Veröffentlichung auf STRATO Hosting Basic, Schritt für Schritt |
 

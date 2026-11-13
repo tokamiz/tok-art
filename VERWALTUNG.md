@@ -9,7 +9,7 @@ Technische Einzelheiten: [TECHNIK.md](TECHNIK.md) · Veröffentlichung: [STRATO.
 ## Inhalt
 
 1. Die Entscheidung: EasyAdmin und MariaDB
-2. Erste Schritte
+2. Erste Schritte (mit Checkliste vor echten Inhalten)
 3. Bedienung
 4. Fotos und Videos – Datenschutz beim Upload
 5. Wo die Daten liegen
@@ -83,6 +83,31 @@ Dann http://localhost:8000/admin öffnen und anmelden.
 
 - Passwort vergessen oder ändern: `make admin EMAIL=…` noch einmal – das Passwort wird neu gesetzt.
 - Für die Entwicklung gibt es zusätzlich das Testkonto `admin@example.org` (Passwort `entwicklung-2026`) – **nur lokal**, es wird nicht mit veröffentlicht (siehe Abschnitt 5).
+
+### Bevor du mit echten Inhalten anfängst – Checkliste
+
+| Punkt | Worum es geht | Mehr dazu |
+|---|---|---|
+| **Sichern** | Datenbank und eigene Fotos stehen **nicht in Git**. Die Datenbank liegt nur im Docker-Volume – `docker compose down -v` oder „Purge data" in Docker Desktop löschen sie. Regelmäßig `make db-export` und `public/media/` nach HiDrive kopieren. | Abschnitt 5 |
+| **Fotos als JPEG** | iPhone-Fotos sind meist HEIC – das nimmt die Verwaltung nicht an. Als JPEG exportieren oder am iPhone „Maximale Kompatibilität" wählen. Ort und Kameradaten entfernt die App beim Upload selbst. | Abschnitt 4 |
+| **Videos ohne Ort** | Videos kann die App nicht bereinigen – vorher ohne Ortsinformationen exportieren, kurz und klein halten. | Abschnitt 4 |
+| **Größe** | bis 50 MB pro Datei; auf dem Server gilt die PHP-Einstellung von STRATO. | Abschnitt 4 |
+| **„Über mich"** | Der Text steht nicht in der Verwaltung, sondern in `templates/home/index.html.twig`. | Abschnitt 5 |
+| **Beispielinhalte** | in der Verwaltung löschen, sobald eigene da sind (erst Einträge, dann Fotos, Reisen, Themen). `data/*.json` **nicht** löschen – das sind die Startdaten der Tests. | Abschnitt 5 |
+| **Wo pflegen** | vor dem Online-Gang lokal, dann einmal übertragen (`make db-export`); danach nur noch online. Nicht mischen. | Abschnitt 6 |
+| **Committen** | Code-Änderungen wie gewohnt committen – eigene Fotos und die Datenbank gehen dabei nicht mit (`public/media/*` und das Docker-Volume sind nicht in Git). | Abschnitt 5 |
+
+**Vor dem Online-Gang** fehlen außerdem: Impressum und Datenschutzerklärung, ein responsives Layout und auf STRATO die Prüfung von PHP-Erweiterungen und Upload-Grenzen sowie das Anlegen der Datenbank – siehe [STRATO.md](STRATO.md), Abschnitte 1 und 9.
+
+### Was vor dem Start noch behoben wurde
+
+Beim Prüfen vor dem ersten echten Inhalt fielen drei Probleme auf, die bei Handyfotos sofort aufgetreten wären:
+
+| Problem | Folge | Lösung |
+|---|---|---|
+| PHP im Container nahm nur **2 MB** pro Upload an | Handyfotos (3–10 MB) ließen sich nicht hochladen | `docker/php/uploads.ini`: 50 MB pro Datei, 512 MB Speicher für die Bildverarbeitung |
+| Neue Dateien in `public/media/` waren **nicht von Git ausgeschlossen** | eigene Fotos wären mit `git add .` auf GitHub gelandet | `/public/media/*` in `.gitignore`; die 19 Beispielmedien bleiben versioniert |
+| Löschen eines Beispielfotos hätte **die Datei mitgelöscht** | `make test` wäre danach fehlgeschlagen | Dateien der Beispielmedien aus `data/media.json` werden nie gelöscht (mit Test) |
 
 ---
 
